@@ -1,11 +1,10 @@
-import { useSelector } from "react-redux";
-import { getTasks } from "redux/selectors";
+import { useTodoStore } from "store/store";
 import css from "./TaskCounter.module.css";
 
 export const TaskCounter = () => {
-  const tasks = useSelector(getTasks);
+  const todos = useTodoStore(state => state.todos);
 
-  const count = tasks.reduce(
+  const count = todos.reduce(
     (acc, task) => {
       if (task.completed) {
         acc.completed += 1;
@@ -20,6 +19,7 @@ export const TaskCounter = () => {
   return (
     <div>
       <p className={css.text}>Active: {count.active}</p>
+
       <p className={css.text}>Completed: {count.completed}</p>
     </div>
   );
